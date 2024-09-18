@@ -1,0 +1,46 @@
+<app-header></app-header>
+<div class="bg-cyan-950 w-full py-40 flex items-center justify-center">
+  <form [formGroup]="loginForm">
+    <div class="flex flex-col">
+      <h1 class="text-4xl font-mono font-bold text-emerald-500 mb-7">Login</h1>
+      <input
+        class="w-56 h-12 bg-black ps-3 rounded-xl border border-stone-500 text-white"
+        type="text"
+        placeholder="Email"
+        formControlName="email"
+      />
+      @if (emailValidation && emailValidation.invalid &&
+      emailValidation.touched) {
+      <p class="text-red-500 pl-3">Please enter a valid email</p>
+      }
+
+      <input
+        class="w-56 h-12 bg-black ps-3 rounded-xl border border-stone-500 text-white mt-3"
+        type="password"
+        placeholder="Password"
+        formControlName="password"
+      />
+      @if (passwordValidation && passwordValidation.invalid &&
+      passwordValidation.touched) {
+      <p class="text-red-500 pl-3">Password is required</p>
+      } @if (erroMsg) {
+      <p class="text-red-500 pt-2">Email and Password does not match</p>
+      }
+
+      <button
+        (click)="login()"
+        [disabled]="loginForm.invalid"
+        type="submit"
+        class="w-56 h-12 bg-white text-black border border-gray-700 rounded-xl mt-3"
+        [ngClass]="{ 'cursor-not-allowed opacity-50': loginForm.invalid }"
+      >
+        Log in
+      </button>
+
+      <p class="text-[#eeeee6] pt-2">
+        Don't have an account?
+        <a class="text-[#9cb0f3]" routerLink="/signup"> Sign up </a>
+      </p>
+    </div>
+  </form>
+</div>
